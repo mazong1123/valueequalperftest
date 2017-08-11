@@ -114,20 +114,6 @@ namespace perftest
         }
 
         [Benchmark(InnerIterationCount = iterCount)]
-        /*[InlineData("R", 104234.343)]
-        [InlineData("R", double.MinValue / 2)]
-        [InlineData("R", Math.PI)]
-        [InlineData("R", Math.E)]
-        [InlineData("R", double.MaxValue)]
-        [InlineData("R", double.MinValue)]
-        [InlineData("R", double.NaN)]
-        [InlineData("R", double.PositiveInfinity)]
-        [InlineData("R", double.NegativeInfinity)]
-        [InlineData("R", 2.2250738585072009E-308)]
-        [InlineData("R", -2.2250738585072009E-308)]
-        [InlineData("R", 1.1125369292536E-308)]
-        [InlineData("R", -0.0)]
-        [InlineData("R", 0.0)]*/
         public void TestDoubleZero()
         {
             DoubleStruct d1 = new DoubleStruct();
