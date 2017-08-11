@@ -80,24 +80,15 @@ namespace perftest
         public Cls _y;
     }
 
-    struct MySTruct7
+    struct MyStruct7
     {
         public byte _a;
-        public bool Equals(object obj)
-        {
-            return false;
-        }
-
-        public int GetHashCode()
-        {
-            return 0;
-        }
     }
 
     struct MyStruct8
     {
-        MySTruct7 x;
-        MySTruct7 y;
+        MyStruct7 x;
+        MyStruct7 y;
     }
 
     public class ValueEqualTest
@@ -113,9 +104,34 @@ namespace perftest
             }
         }
 
+        public static void Warmup()
+        {
+            DoubleStruct d1 = new DoubleStruct();
+            d1.value1 = 1;
+            d1.value2 = 0.0;
+
+            DoubleStruct d2 = new DoubleStruct();
+            d2.value1 = 1;
+            d2.value2 = -0.0;
+
+            d1.Equals(d2);
+
+            MyStruct8 s1 = new MyStruct8();
+            MyStruct8 s2 = new MyStruct8();
+
+            s1.Equals(s2);
+
+            MyStruct3 t1 = new MyStruct3();
+            MyStruct3 t2 = new MyStruct3();
+
+            t1.Equals(t2);
+        }
+
         [Benchmark(InnerIterationCount = iterCount)]
         public void TestDoubleZero()
         {
+            Warmup();
+
             DoubleStruct d1 = new DoubleStruct();
             d1.value1 = 1;
             d1.value2 = 0.0;
@@ -139,6 +155,8 @@ namespace perftest
         [Benchmark(InnerIterationCount = iterCount)]
         public void TestStructNonOverriddenEquals()
         {
+            Warmup();
+
             MyStruct8 s1 = new MyStruct8();
             MyStruct8 s2 = new MyStruct8();
 
@@ -157,6 +175,8 @@ namespace perftest
         [Benchmark(InnerIterationCount = iterCount)]
         static void TestDeepOverriddenEquals()
         {
+            Warmup();
+            
             MyStruct3 s1 = new MyStruct3();
             MyStruct3 s2 = new MyStruct3();
 
@@ -171,6 +191,5 @@ namespace perftest
                 }
             }
         }
-
     }
 }
